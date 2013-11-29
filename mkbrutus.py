@@ -90,7 +90,7 @@ class ApiRos:
         md.update(b'\x00')
         md.update(pwd.encode('UTF-8'))
         md.update(chal)
-        output = self.talk(["/login", "=name=" + username, "=response=00" + binascii.hexlify(md.digest()).decode('UTF-8') ])
+        output = self.talk(["/login", "=name=" + username, "=response=00" + binascii.hexlify(md.digest()).decode('UTF-8')])
         return output
 
     def talk(self, words):
