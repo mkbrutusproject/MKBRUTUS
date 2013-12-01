@@ -42,7 +42,7 @@ Federico Massa - email: <a href="mailto:fgmassa@vanguardsec.com">fgmassa@vanguar
 <h2>
 <a name="motivation--scenario" class="anchor" href="#motivation--scenario"><span class="octicon octicon-link"></span></a>MOTIVATION &amp; SCENARIO</h2>
 
-<p>Mikrotik brand devices (<a href="http://www.mikrotik.com">www.mikrotik.com</a>), which runs the RouterOS operative system, are worldwide known and popular with a high networking market penetration. Many companies choose them as they are a great combination of low-cost and good performance. RouterOS can be also installed on other devices or PC.</p>
+<p>Mikrotik brand devices (<a href="http://www.mikrotik.com">www.mikrotik.com</a>), which runs the RouterOS operative system, are worldwide known and popular with a high networking market penetration. Many companies choose them as they are a great combination of low-cost and good performance. RouterOS can be also installed on other devices such as PC.</p>
 
 <p>This system can be managed by the following ways:</p>
 
@@ -52,14 +52,14 @@ Federico Massa - email: <a href="mailto:fgmassa@vanguardsec.com">fgmassa@vanguar
 <li>Winbox (proprietary GUI of Mikrotik)</li>
 <li>HTTP</li>
 <li>API</li>
-</ul><p>Many network sysadmins choose to close Telnet, SSH and HTTP ports, leaving the Winbox port open for graphical management or another client (developed by third parties) which uses the RouterOS API port, such as applications for Android (managing routers and Hotspots ) or web front-ends.
+</ul><p>Many network sysadmins choose to close Telnet, SSH and HTTP ports, leaving the Winbox port open for graphical management or to another client (developed by third parties) which uses the RouterOS API port, such as applications for Android (managing routers and Hotspots) or web front-ends.
 At this point, MKBRUTUS comes into play ;)</p>
 
-<p>Both Winbox and API ports uses a RouterOS proprietary protocol to "talk" with management clients.</p>
+<p>Both, Winbox and API ports uses a RouterOS proprietary protocol to "talk" with management clients.</p>
 
 <p>It is possible that in the midst of a pentesting project, you can find the ports 8291/TCP (Winbox) and 8728/TCP (API) open and <strong>here we have a new attack vector</strong>.</p>
 
-<p>Because the port 8291/TCP is only possible to authenticate using the Winbox tool (at least by now ;), we had the need of making a tool to make dictionary-based attacks over the API port (8728/TCP), this allows to pentester to have another choice to try to gain access.</p>
+<p>Because the port 8291/TCP is only possible to authenticate using the Winbox tool (at least by now ;), we realized the need of develop a tool to perform dictionary-based attacks over the API port (8728/TCP), in order to allow the pentester to have another option to try to gain access.</p>
 
 <h2>
 <a name="dictionary-based-attack" class="anchor" href="#dictionary-based-attack"><span class="octicon octicon-link"></span></a>DICTIONARY-BASED ATTACK</h2>
