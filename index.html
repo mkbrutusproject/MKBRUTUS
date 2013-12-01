@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="MKBRUTUS : Password bruteforcer for MikroTik devices or boxes running RouterOS" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>MKBRUTUS</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/mkbrutusproject/MKBRUTUS">View on GitHub</a>
+
+          <h1 id="project_title">MKBRUTUS</h1>
+          <h2 id="project_tagline">Password bruteforcer for MikroTik devices or boxes running RouterOS</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/mkbrutusproject/MKBRUTUS/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/mkbrutusproject/MKBRUTUS/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h2>
+<a name="authors" class="anchor" href="#authors"><span class="octicon octicon-link"></span></a>AUTHORS:</h2>
+
+<p>Ramiro Caire   - email: <a href="mailto:ramiro.caire@gmail.com">ramiro.caire@gmail.com</a>  / Twitter: <a href="https://github.com/rcaire" class="user-mention">@rcaire</a><br>
+Federico Massa - email: <a href="mailto:fgmassa@vanguardsec.com">fgmassa@vanguardsec.com</a> / Twitter: <a href="https://github.com/fgmassa" class="user-mention">@fgmassa</a><br></p>
+
+<p><a href="https://github.com/mkbrutusproject/mkbrutus">https://github.com/mkbrutusproject/mkbrutus</a></p>
+
+<h2>
+<a name="motivation--scenario" class="anchor" href="#motivation--scenario"><span class="octicon octicon-link"></span></a>MOTIVATION &amp; SCENARIO</h2>
+
+<p>Mikrotik brand devices (<a href="http://www.mikrotik.com">www.mikrotik.com</a>), which runs the RouterOS operative system, are worldwide known and popular with a high networking market penetration. Many companies choose them as they are a great combination of low-cost and good performance. RouterOS can be also installed on other devices or PC.</p>
+
+<p>This system can be managed by the following ways:</p>
+
+<ul>
+<li>Telnet</li>
+<li>SSH</li>
+<li>Winbox (proprietary GUI of Mikrotik)</li>
+<li>HTTP</li>
+<li>API</li>
+</ul><p>Many network sysadmins choose to close Telnet, SSH and HTTP ports, leaving the Winbox port open for graphical management or another client (developed by third parties) which uses the RouterOS API port, such as applications for Android (managing routers and Hotspots ) or web front-ends.
+At this point, MKBRUTUS comes into play ;)</p>
+
+<p>Both Winbox and API ports uses a RouterOS proprietary protocol to "talk" with management clients.</p>
+
+<p>It is possible that in the midst of a pentesting project, you can find the ports 8291/TCP (Winbox) and 8728/TCP (API) open and <strong>here we have a new attack vector</strong>.</p>
+
+<p>Because the port 8291/TCP is only possible to authenticate using the Winbox tool (at least by now ;), we had the need of making a tool to make dictionary-based attacks over the API port (8728/TCP), this allows to pentester to have another choice to try to gain access.</p>
+
+<h2>
+<a name="dictionary-based-attack" class="anchor" href="#dictionary-based-attack"><span class="octicon octicon-link"></span></a>DICTIONARY-BASED ATTACK</h2>
+
+<p>MKBRUTUS is a tool developed in Python 3 that performs bruteforce attacks (dictionary-based) systems against RouterOS (ver. 3.x or newer) which have the 8728/TCP port open.
+Currently has all the basic features of a tool to make dictionary-based attacks, but in the future we plan to incorporate other options. There are many sites from where you can download wordlists, here are some:
+<a href="http://wiki.skullsecurity.org/Passwords">http://wiki.skullsecurity.org/Passwords</a>
+<a href="http://wordlist.sourceforge.net/">http://wordlist.sourceforge.net/</a></p>
+
+<h2>
+<a name="screenshots" class="anchor" href="#screenshots"><span class="octicon octicon-link"></span></a>SCREENSHOTS</h2>
+
+<p>MKBRUTUS options
+<img src="http://seguridadetica.files.wordpress.com/2013/11/mkbrutus_2.png" alt="MKBRUTUS options"></p>
+
+<p>MKBRUTUS performing an attack!
+<img src="http://seguridadetica.files.wordpress.com/2013/11/mkbrutus_1.png" alt="MKBRUTUS performing an attack !"></p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>INSTALLATION</h2>
+
+<p>The project is available here in GitHub, and you can install just by typing:</p>
+
+<p># git clone <a href="https://github.com/mkbrutusproject/MKBRUTUS.git">https://github.com/mkbrutusproject/MKBRUTUS.git</a></p>
+
+<p>It is necessary to have Python 3.x installed in order to run this tool. It was successfully tested in KALI LINUX, previous Py3 installation (apt-get install python3).</p>
+
+<h2>
+<a name="disclaimer" class="anchor" href="#disclaimer"><span class="octicon octicon-link"></span></a>DISCLAIMER:</h2>
+
+<p>This tool is intended only for testing Mikrotik devices security in ethical pentest or audits process.
+The authors are not responsible for any damages you use this tool.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">MKBRUTUS maintained by <a href="https://github.com/mkbrutusproject">mkbrutusproject</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
