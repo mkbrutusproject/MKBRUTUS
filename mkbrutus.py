@@ -8,6 +8,9 @@
 # AUTHORS:
 # Ramiro Caire   - email: ramiro.caire@gmail.com  / Twitter: @rcaire
 # Federico Massa - email: fgmassa@vanguardsec.com / Twitter: @fgmassa
+#
+# WEB SITE:
+# http://mkbrutusproject.github.io/MKBRUTUS/
 # https://github.com/mkbrutusproject/mkbrutus
 #
 # SUMMARY:
@@ -49,6 +52,7 @@ banner=('''          _   _   _   _  _____  ____ _   _  ____ _   _ _____
 
                       Mikrotik RouterOS Bruteforce Tool 1.0.0
            Ramiro Caire (@rcaire) & Federico Massa (@fgmassa)
+                    http://mkbrutusproject.github.io/MKBRUTUS
        ''')
 
 def usage():
