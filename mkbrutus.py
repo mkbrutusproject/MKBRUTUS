@@ -62,7 +62,7 @@ banner=('''          _   _   _   _  _____  ____ _   _  ____ _   _ _____
          | |  | || |\  \| |_/ / |\ \| |_| | | | | |_| /\__/ /
          \_|  |_/\_| \_/\____/\_| \_|\___/  \_/  \___/\____/
 
-                      Mikrotik RouterOS Bruteforce Tool 1.0.0
+                      Mikrotik RouterOS Bruteforce Tool 1.0.1
            Ramiro Caire (@rcaire) & Federico Massa (@fgmassa)
                     http://mkbrutusproject.github.io/MKBRUTUS
        ''')
@@ -147,7 +147,6 @@ class ApiRos:
 
     def readWord(self):
         ret = self.readStr(self.readLen())
-        #print((">>> " + ret))
         return ret
 
     def writeLen(self, l):
