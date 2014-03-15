@@ -3,7 +3,7 @@
 
 #=======================================================================================================================
 #
-# MKBRUTUS.py v1.0.1 - Password bruteforcer for MikroTik devices or boxes running RouterOS
+# MKBRUTUS.py v1.0.2 - Password bruteforcer for MikroTik devices or boxes running RouterOS
 #
 # AUTHORS:
 # Ramiro Caire   - email: ramiro.caire@gmail.com  / Twitter: @rcaire
@@ -62,7 +62,7 @@ banner=('''          _   _   _   _  _____  ____ _   _  ____ _   _ _____
          | |  | || |\  \| |_/ / |\ \| |_| | | | | |_| /\__/ /
          \_|  |_/\_| \_/\____/\_| \_|\___/  \_/  \___/\____/
 
-                      Mikrotik RouterOS Bruteforce Tool 1.0.1
+                      Mikrotik RouterOS Bruteforce Tool 1.0.2
            Ramiro Caire (@rcaire) & Federico Massa (@fgmassa)
                     http://mkbrutusproject.github.io/MKBRUTUS
        ''')
@@ -72,13 +72,14 @@ def usage():
     NAME
     \t MKBRUTUS.py - Password bruteforcer for MikroTik devices or boxes running RouterOS\n
     USAGE
-    \t python mkbrutus.py [-t] [-p] [-u] [-d] [-q]\n
+    \t python mkbrutus.py [-t] [-p] [-u] [-d] [-s] [-q]\n
     OPTIONS
     \t -t, --target \t\t RouterOS target
     \t -p, --port \t\t RouterOS port (default 8728)
     \t -u, --user \t\t User name (default admin)
     \t -h, --help \t\t This help
     \t -d, --dictionary \t Password dictionary
+    \t -s, --seconds \t\t Delay seconds between retry attempts (default 1) 
     \t -q, --quiet \t\t Quiet mode
     ''')
 
@@ -231,7 +232,7 @@ def run(pwd_num):
 def main():
     print(banner)
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "ht:p:u:d:q", ["help", "target=", "port=", "user=", "dictionary=", "quiet"])
+        opts, args = getopt.getopt(sys.argv[1:], "ht:p:u:d:s:q", ["help", "target=", "port=", "user=", "dictionary=", "seconds=", "quiet"])
     except getopt.GetoptError as err:
         error(err)
         sys.exit(2)
@@ -245,6 +246,7 @@ def main():
     user = None
     dictionary = None
     quietmode = False
+    seconds = None
 
     for opt, arg in opts:
         if opt in ("-h", "--help"):
@@ -258,6 +260,8 @@ def main():
             user = arg
         elif opt in ("-d", "--dictionary"):
             dictionary = arg
+        elif opt in ("-s", "--seconds"):
+            seconds = arg
         elif opt in ("-q", "--quiet"):
             quietmode = True
         else:
@@ -267,16 +271,15 @@ def main():
     if not target:
         error("ERROR: You must specify a Target")
         sys.exit(2)
+    if not dictionary:
+        error("ERROR: You must specify a Dictionary")
+        sys.exit(2)
     if not port:
         port = 8728
     if not user:
         user = 'admin'
-    try:
-        with open(dictionary):
-            pass
-    except IOError as err:
-        error(err)
-        sys.exit(2)
+    if not seconds:
+        seconds = 1
 
     print("[*] Starting bruteforce attack...")
     print("-" * 33)
@@ -350,6 +353,8 @@ def main():
             run(items)
             return
         items +=1
+        time.sleep(int(seconds))
+
     print("[*] ATTACK FINISHED! No suitable credentials were found. Try again with a different wordlist.")
     run(count)
 
