@@ -87,6 +87,15 @@ Currently has all the basic features of a tool to make dictionary-based attacks,
 <p>It is necessary to have Python 3.x installed in order to run this tool. It was successfully tested in KALI LINUX, previous Py3 installation (apt-get install python3).</p>
 
 <h2>
+<a id="using-examples" class="anchor" href="#using-examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>USING EXAMPLES</h2>
+
+<p>Testing against a box at 192.168.1.1 using dictionary rockyou.txt<br>
+$ python3 mkbrutus.py -t 192.168.1.1 -d rockyou.txt -u admin<br>
+<br>
+Testing against a box at 192.168.1.1 using dictionary rockyou.txt but the API port is running in other port<br>
+$ python3 mkbrutus.py -t 192.168.1.1 -d rockyou.txt -u admin -p 8787<br></p>
+
+<h2>
 <a id="disclaimer" class="anchor" href="#disclaimer" aria-hidden="true"><span class="octicon octicon-link"></span></a>DISCLAIMER:</h2>
 
 <p>This tool is intended only for testing Mikrotik devices security in ethical pentest or audits process.
