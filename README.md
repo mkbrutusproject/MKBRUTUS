@@ -5,7 +5,7 @@ Password bruteforcer for MikroTik devices or boxes running RouterOS
 
 AUTHORS:<br>
 Ramiro Caire   - email: ramiro.caire@gmail.com  / Twitter: @rcaire<br>
-Federico Massa - email: fgmassa@vanguardsec.com / Twitter: @fgmassa<br>
+Federico Massa - email: fmassa@vanguardsec.com / Twitter: @fgmassa<br>
 
 WEB SITES:<br>
 http://mkbrutusproject.github.io/MKBRUTUS/<br>
