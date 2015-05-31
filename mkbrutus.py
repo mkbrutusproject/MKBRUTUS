@@ -47,7 +47,6 @@ if sys.version_info < (3, 0):
 import binascii
 import getopt
 import hashlib
-import posix
 import select
 import socket
 import time
