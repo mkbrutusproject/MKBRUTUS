@@ -78,7 +78,7 @@ def usage():
     \t -u, --user \t\t User name (default admin)
     \t -h, --help \t\t This help
     \t -d, --dictionary \t Password dictionary
-    \t -s, --seconds \t\t Delay seconds between retry attempts (default 1) 
+    \t -s, --seconds \t\t Delay seconds between retry attempts (default 1)
     \t -q, --quiet \t\t Quiet mode
     ''')
 
@@ -207,9 +207,9 @@ class ApiRos:
         return c
 
     def writeStr(self, str):
-        n = 0;
+        n = 0
         while n < len(str):
-            r = self.sk.send(bytes(str[n:], 'UTF-8'))
+            r = self.sk.send(bytes(str[n:].encode('utf-8')))
             if r == 0: raise RuntimeError("Connection closed by remote end")
             n += r
 
@@ -285,10 +285,10 @@ def main():
 
     # Catch KeyboardInterrupt
     signal.signal(signal.SIGINT, signal_handler)
-    
+
     # Looking for default RouterOS creds
     defcredcheck = True
-    
+
     # Get the number of lines in file
     count = 0
     dictFile = codecs.open(dictionary,'rb', encoding='utf-8', errors='ignore')
@@ -340,7 +340,7 @@ def main():
                 print("")
                 defcredcheck = False
                 time.sleep(1)
-       
+
         loginoutput = apiros.login(user, password)
         login = ''.join(loginoutput[0][0])
 
